@@ -8,6 +8,7 @@
       - httpd
       - php
       - php-mysql
+      - libsemanage-python
   - name: Install a web page
     template:
       src: templates/index.php.j2
