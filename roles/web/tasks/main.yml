@@ -1,6 +1,6 @@
 ---
 - name: install and configure httpd
-  hosts: all
+  hosts: web
   tasks:
   - name: Install httpd
     yum:  "pkg={{ item }} state=latest"

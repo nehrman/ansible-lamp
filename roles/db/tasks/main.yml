@@ -1,6 +1,6 @@
 ---
 - name: install and configure mysql
-  hosts: all
+  hosts: db
   tasks:
   - name: Install mysql
     yum:  "pkg={{ item }} state=latest"

@@ -1,9 +1,3 @@
 ---
-- hosts: db
-  roles:
-    - db
-- hosts: web
-  roles:
-    - web
 - include: roles/web/tasks/main.yml
 - include: roles/db/tasks/main.yml
