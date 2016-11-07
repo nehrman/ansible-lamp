@@ -10,27 +10,6 @@
       - MySQL-python
       - php-mysql
 
-  - name: Ensure MySQL is properly configured
-    template:
-      src: templates/my.cnf.j2
-      dest: /etc/my.cnf
-
-  - name: Empty MySQL log
-    file:
-      path: /var/log/mysqld.log
-      state: touch
-      owner: mysql
-      group: mysql
-      mode: 0775
-
-  - name: Ensure the MariaDB PID folder is present
-    file:
-      path: /var/run/mariadb
-      state: directory
-      owner: mysql
-      group: mysql
-      mode: 0775
-
   - name: Open port
     firewalld: "port=3306/tcp state=enabled zone=public permanent=yes immediate=true"
 
