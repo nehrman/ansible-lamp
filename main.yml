@@ -1,0 +1,3 @@
+---
+- include: roles/web/web.yml
+- include: roles/db/db.yml
