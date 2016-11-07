@@ -23,6 +23,14 @@
       group: mysql
       mode: 0775
 
+  - name: Ensure the MariaDB PID folder is present
+    file:
+      path: /var/run/mysqld
+      state: directory
+      owner: mysql
+      group: mysql
+      mode: 0775
+
   - name: Open port
     firewalld: "port=3306/tcp state=enabled zone=public permanent=yes immediate=true"
 
