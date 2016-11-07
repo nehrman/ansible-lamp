@@ -1,10 +1,11 @@
 ---
-- name: install and configure mysql
+- name: install and configure mariadb
   hosts: db
   tasks:
-  - name: Install mysql
+  - name: Install mariadb
     yum:  "pkg={{ item }} state=latest"
     with_items:
+      - mariadb
       - mariadb-server
       - MySQL-python
       - php-mysql
@@ -14,10 +15,18 @@
       src: templates/my.cnf.j2
       dest: /etc/my.cnf
 
+  - name: Empty MySQL log
+    file:
+      path: /var/log/mysqld.log
+      state: touch
+      owner: mysql
+      group: mysql
+      mode: 0775
+
   - name: Open port
     firewalld: "port=3306/tcp state=enabled zone=public permanent=yes immediate=true"
 
-  - name: start and enable httpd
+  - name: start and enable mariadb
     service: "name=mariadb state=started enabled=yes"
 
   - name: Ensure the application db is present

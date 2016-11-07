@@ -9,7 +9,7 @@ d>
 <?php
 echo  "List of Databases: <br />";
         {% for host in groups['db'] %}
-                $link = mysqli_connect('db01.fale.io', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].dbpass }}') or die(mysqli_connect_error($link));
+                $link = mysqli_connect('db.example.demo', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].dbpass }}') or die(mysqli_connect_error($link));
         {% endfor %}
         $res = mysqli_query($link, "SHOW DATABASES;");
         while ($row = mysqli_fetch_assoc($res)) {
