@@ -1,30 +1,21 @@
 ---
-- name: Ensure HTTPd and PHP are installed
-  yum:
-    name: '{{ item }}'
-    state: latest
-  with_items:
-  - httpd
-  - php
-  - php-mysql
-
-- name: Ensure FirewallD will accept HTTP connections
-  firewalld:
-    port: 80/tcp
-    permanent: True
-    state: enabled
-    immediate: True
-  become: True
-
-- name: Ensure HTTPd is running and enabled
-  service:
-    name: httpd
-    state: started
-    enabled: True
-  become: True
-
-- name: Ensure index.php is current
-  template:
-    src: index.php.j2
-    dest: /var/www/html/index.php
-  become: True
+- name: install and configure httpd
+  hosts: all
+  tasks:
+  - name: Install httpd
+    yum:  "pkg={{ item }} state=latest"
+    with_items:
+      - httpd
+      - php
+      - php-mysql
+  - name: Install a web page
+    template:
+      src: templates/index.php.j2
+      dest: /var/www/html/index.php
+  - name: Open port
+    firewalld: "port={{ item }}/tcp state=enabled zone=public permanent=yes immediate=true"
+    with_items:
+      - 80
+      - 443
+  - name: start and enable httpd
+    service: "name=httpd state=started enabled=yes"
