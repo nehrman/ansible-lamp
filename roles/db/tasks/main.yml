@@ -25,7 +25,7 @@
 
   - name: Ensure the MariaDB PID folder is present
     file:
-      path: /var/run/mysqld
+      path: /var/run/mariadb
       state: directory
       owner: mysql
       group: mysql
