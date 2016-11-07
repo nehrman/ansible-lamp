@@ -2,8 +2,7 @@
 - name: Ensure HTTPd and PHP are installed
   yum:
     name: '{{ item }}'
-    state: present
-  become: True
+    state: latest
   with_items:
   - httpd
   - php
