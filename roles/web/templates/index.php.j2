@@ -1,33 +1,11 @@
 <title>Ansible Application</title>
   <style>* { font-family: Helvetica, Arial, sans-serif }
-div {
-   border: 2px solid;
-   width: 300px;
-   border: 25px solid;
-   padding: 25px;
-   margin: 25px;
-
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-
-  -ms-word-break: break-all;
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  word-break: break-all;
-
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-     }
 </style>
 <body>
   <br />
-  <br />
   <H1>
 "Hello, World! <br>
-I am the web server {{ inventory_hostname }}";
+I am the web server running on : {{ inventory_hostname }}";
   </H1>
 <br />
 <H1>
@@ -39,15 +17,16 @@ echo  "List of Databases: <br />";
         {% endfor %}
         $res = mysqli_query($link, "SHOW DATABASES;");
         while ($row = mysqli_fetch_assoc($res)) {
-                echo $row['Database'] . "\n";
+                echo $row['Database'] . "\n";<br>
         }
 ?>
 </div>
 </H1>
 <H1>
-List dbservers :
+The database server are :
         {% for host in groups['db'] %}
               '{{ hostvars[host]['inventory_hostname'] }}'
+              <br>
         {% endfor %}
 </H1>
 </body>
