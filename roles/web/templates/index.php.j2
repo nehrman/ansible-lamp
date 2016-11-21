@@ -2,10 +2,13 @@
 <body>
   <br />
   <br />
+  <H1>
   <?php
   Print "Hello, World! I am the web server {{ inventory_hostname }}";
   ?>
+  </H1>
 <br />
+<H1>
 <?php
 echo  "List of Databases: <br />";
         {% for host in groups['db'] %}
@@ -16,6 +19,11 @@ echo  "List of Databases: <br />";
                 echo $row['Database'] . "\n";
         }
 ?>
+</H1>
+List dbservers : 
+        {% for host in groups['db'] %}
+              echo '{{ hostvars[host]['inventory_hostname'] }}'
+        {% endfor %}
 </body>
 </html>
 
