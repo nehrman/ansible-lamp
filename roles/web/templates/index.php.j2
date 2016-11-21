@@ -17,13 +17,13 @@ echo  "List of Databases: <br />";
         {% endfor %}
         $res = mysqli_query($link, "SHOW DATABASES;");
         while ($row = mysqli_fetch_assoc($res)) {
-                echo $row['Database'] . "\n";<br>
+                echo $row['Database'] . "<br>\n";
         }
 ?>
 </div>
 </H1>
 <H1>
-The database server are :
+The database server are <br>:
         {% for host in groups['db'] %}
               '{{ hostvars[host]['inventory_hostname'] }}'
               <br>
