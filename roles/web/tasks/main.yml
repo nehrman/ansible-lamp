@@ -11,7 +11,7 @@
       - libsemanage-python
   - name: Install a web page
     template:
-      src: index.php.j2
+      src: ../templates/index.php.j2
       dest: /var/www/html/index.php
   - name: Open port
     firewalld: "port={{ item }}/tcp state=enabled zone=public permanent=yes immediate=true"
