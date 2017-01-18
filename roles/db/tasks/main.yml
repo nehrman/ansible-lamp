@@ -15,7 +15,7 @@
 
   - name: Ensure MariaDB is properly configured
     template:
-      src: /templates/etc_my.cnf.d_network.cnf.j2
+      src: etc_my.cnf.d_network.cnf.j2
       dest: /etc/my.cnf.d/network.cnf
   - name: start and enable mariadb
     service: "name=mariadb state=started enabled=yes"
