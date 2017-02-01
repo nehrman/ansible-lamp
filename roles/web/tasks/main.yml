@@ -5,8 +5,8 @@
 
   - name: Install httpd
     yum:
-      name: "{{ item }}"
-      state: present
+      pkg: "{{ item }}"
+      state: latest
       with_items:
         - httpd
         - php

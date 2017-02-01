@@ -4,8 +4,8 @@
   tasks:
   - name: Install mariadb
     yum:
-      name: "{{ item }}"
-      state: present
+      pkg: "{{ item }}"
+      state: latest
       with_items:
         - mariadb
         - mariadb-server
