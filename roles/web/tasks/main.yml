@@ -3,13 +3,13 @@
   tasks:
     - name: Install httpd
       yum:
-        - name: "{{ item }}"
-          state: latest
-          with_items:
-            - httpd
-            - php
-            - php-mysql
-            - libsemanage-python
+        name: "{{ item }}"
+        state: latest
+        with_items:
+          - httpd
+          - php
+          - php-mysql
+          - libsemanage-python
 
     - name: Install a web page
       template:
