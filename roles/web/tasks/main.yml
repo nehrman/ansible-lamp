@@ -6,12 +6,12 @@
   - name: Install httpd
     yum:
       name: "{{ item }}"
+      state: present
       with_items:
         - httpd
         - php
         - php-mysql
         - libsemanage-python
-      state: present
 
   - name: Install a web page
     template:
