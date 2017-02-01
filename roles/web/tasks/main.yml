@@ -2,24 +2,37 @@
 - name: Install and configure httpd
   hosts: web
   tasks:
-  - name: Install httpd
-    yum:  "pkg={{ item }} state=latest"
+
+- name: Install httpd
+  yum:
+    name: "{{ item }}"
     with_items:
       - httpd
       - php
       - php-mysql
       - libsemanage-python
-  - name: Install a web page
-    template:
-      src: ../templates/index.php.j2
-      dest: /var/www/html/index.php
-  - name: Open port
-    firewalld: "port={{ item }}/tcp state=enabled zone=public permanent=yes immediate=true"
-    with_items:
-      - 80
-      - 443
-  - name: Allow httpd to connect to network
-    seboolean: name=httpd_can_network_connect state=yes persistent=yes
+    state: present
 
-  - name: start and enable httpd
-    service: "name=httpd state=started enabled=yes"
+- name: Install a web page
+  template:
+    src: ../templates/index.php.j2
+    dest: /var/www/html/index.php
+    backup: yes
+
+- name: Open port
+  firewalld: "port={{ item }}/tcp state=enabled zone=public permanent=yes immediate=true"
+  with_items:
+    - 80
+    - 443
+
+- name: Allow httpd to connect to network
+  seboolean:
+    state: yes
+    name: httpd_can_network_connect
+    persistent: yes
+
+- name: start and enable httpd
+  service:
+    name: httpd
+    enabled: yes
+    state: started
