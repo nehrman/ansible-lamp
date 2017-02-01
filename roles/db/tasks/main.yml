@@ -1,5 +1,5 @@
 ---
-- name: install and configure mariadb
+- name: Install and configure mariadb
   hosts: db
   tasks:
   - name: Install mariadb
