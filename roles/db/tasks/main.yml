@@ -2,14 +2,12 @@
   name: Install and configure mariadb
   tasks:
     - name: Install mariadb
-      yum:
-        name: "{{ item }}"
-        state: latest
-        with_items:
-          - mariadb
-          - mariadb-server
-          - MySQL-python
-          - php-mysql
+      yum: name="{{ item }}" state=latest
+      with_items:
+        - mariadb
+        - mariadb-server
+        - MySQL-python
+        - php-mysql
 
     - name: Open port
       firewalld:
