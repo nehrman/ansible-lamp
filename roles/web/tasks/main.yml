@@ -4,14 +4,12 @@
   tasks:
 
   - name: Install httpd
-    yum:
-      pkg: "{{ item }}"
-      state: latest
-      with_items:
-        - httpd
-        - php
-        - php-mysql
-        - libsemanage-python
+    yum "pkg= {{ item }} state= latest "
+    with_items:
+      - httpd
+      - php
+      - php-mysql
+      - libsemanage-python
 
   - name: Install a web page
     template:
