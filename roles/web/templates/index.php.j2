@@ -23,7 +23,8 @@ echo  "List of Databases: <br />";
 </div>
 </H1>
 <H1>
-The database server are <br>:
+The servers are <br>:
+
         {% for host in groups['db'] %}
               '{{ hostvars[host]['inventory_hostname'] }}'
               <br>
@@ -31,4 +32,3 @@ The database server are <br>:
 </H1>
 </body>
 </html>
-
