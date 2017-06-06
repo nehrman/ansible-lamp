@@ -1,0 +1,1 @@
+- include: roles/web/tasks/main.yml
