@@ -1,4 +1,5 @@
 # vim:se ft=ansible
+# Replace all with group name to match your needs.
 - hosts: all
   name: Install and configure httpd
   tasks:

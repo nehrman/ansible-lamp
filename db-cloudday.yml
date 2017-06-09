@@ -1,3 +1,4 @@
+# Replace host with the group name to match your needs. 
 - hosts: all
   name: Install and configure mariadb
   vars:
