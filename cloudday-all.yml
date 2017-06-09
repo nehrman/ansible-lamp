@@ -1,6 +1,6 @@
 # vim:se ft=ansible
 # Replace all with group name to match your needs.
-- hosts: 192.168.100.37
+- hosts: vmweb2
   name: Install and configure httpd
   tasks:
     - name: Install httpd
@@ -43,7 +43,7 @@
 
 
 # Replace host with the group name to match your needs. 
-- hosts: 192.168.100.38
+- hosts: vmdb2
   name: Install and configure mariadb
   vars:
         dbname: "dbnametoto"
