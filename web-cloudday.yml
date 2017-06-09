@@ -13,7 +13,7 @@
 
     - name: Install index.php
       template:
-        src: ./role/web/templates/index.php.j2
+        src: role/web/templates/index.php.j2
         dest: /var/www/html/index.php
         backup: yes
 
