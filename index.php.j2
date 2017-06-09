@@ -6,9 +6,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="shortcut icon" type="image/png" href="http://i.imgur.com/ip1ocDM.png" />
-    
+
 	<link rel="stylesheet" type="text/css" href="./style.css">
-    
+
     <script src="./javascript.js"></script>
     <title>Application Open Cloud Day</title>
 
@@ -16,7 +16,7 @@
 <body>
 <!-- Main container -->
 <div class="page-container">
-    
+
 <!-- bloc-0 -->
 <div class="bloc bloc-fill-screen bg-header-listing-tech-all-products-2000x730 bgc-white l-bloc" id="bloc-0">
 	<div class="container fill-bloc-top-edge">
@@ -83,12 +83,12 @@
 			<div class="col-sm-12">
 				<span class="li_data pull-left icon-lg"></span>
 				<h3 class="mg-md  text-center">
+<!--
 					Le service mySQL fonctione sur:<br />
-<!--#
 {% for host in groups['db'] %}
 #						'{{ hostvars[host]['inventory_hostname'] }}'
-#              				<br>
-#        				{% endfor %}
+#				<br>
+#				{% endfor %}
 -->
 				</h3>
 			</div>
@@ -99,7 +99,7 @@
 					La liste des bases de données découvertes:<br />
 				</h3>
 			</div>
-<!--#
+<!--
 #			<?php
 #				{% for host in groups['db'] %}
 #				$link = mysqli_connect('{{ hostvars[host]['inventory_hostname'] }}', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].dbpass }}') or die(mysqli_connect_error($link));
