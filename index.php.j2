@@ -83,13 +83,11 @@
 			<div class="col-sm-12">
 				<span class="li_data pull-left icon-lg"></span>
 				<h3 class="mg-md  text-center">
-'{#
 					Le service mySQL fonctione sur:<br />
-# {% for host in groups['db'] %}
-#						'{{ hostvars[host]['inventory_hostname'] }}'
-#				<br>
-#				{% endfor %}
-#}'
+					{% for host in {{ db }} %}
+						'{{ hostvars[host]['inventory_hostname'] }}'
+				<br>
+				{% endfor %}
 				</h3>
 			</div>
 		</div>
@@ -99,18 +97,16 @@
 					La liste des bases de données découvertes:<br />
 				</h3>
 			</div>
-'{#
-#			<?php
-#				{% for host in groups['db'] %}
-#				$link = mysqli_connect('{{ hostvars[host]['inventory_hostname'] }}', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].dbpass }}') or die(mysqli_connect_error($link));
-#		        {% endfor %}
-#		        $res = mysqli_query($link, "SHOW DATABASES;");
-#				while ($row = mysqli_fetch_assoc($res))
-#				{
-#				echo $row['Database'] . "<br>\n";
-#				}
-#		    ?>
-#}'
+			<?php
+			{% for host in {{ db }}  %}
+				$link = mysqli_connect('{{ hostvars[host]['inventory_hostname'] }}', '{{ hostvars[host].dbuser }}', '{{ hostvars[host].dbpass }}') or die(mysqli_connect_error($link));
+		        {% endfor %}
+		        $res = mysqli_query($link, "SHOW DATABASES;");
+				while ($row = mysqli_fetch_assoc($res))
+				{
+				echo $row['Database'] . "<br>\n";
+				}
+		    ?>
 			</div>
 		</div>
 	</div>
@@ -123,12 +119,12 @@
 
 </div>
 <!-- Main container END -->
-    
+
 
 </body>
-    
+
 <!-- Google Analytics -->
- 
+
 <!-- Google Analytics END -->
 
 </html>

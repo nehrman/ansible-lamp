@@ -1,0 +1,94 @@
+# vim:se ft=ansible
+# Replace all with group name to match your needs.
+- hosts: all
+  name: Install and configure httpd
+  tasks:
+    - name: Install httpd
+      yum: name={{ item }} state=latest
+      with_items:
+        - httpd
+        - php
+        - php-mysql
+        - libsemanage-python
+
+    - name: Install index.php
+      template:
+        src: index.php.j2
+        dest: /var/www/html/index.php
+        backup: yes
+
+    - name: Install a web page
+      copy: src={{ item }} dest=/var/www/html
+      with_fileglob:
+              - ../files/fonts/
+              - ../files/*
+
+    - name: Open port
+      firewalld: "port={{ item }}/tcp state=enabled zone=public permanent=yes immediate=true"
+      with_items:
+        - 80
+        - 443
+
+    - name: Allow httpd to connect to network
+      seboolean:
+        state: yes
+        name: httpd_can_network_connect
+        persistent: yes
+
+    - name: start and enable httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+
+
+# Replace host with the group name to match your needs. 
+- hosts: all
+  name: Install and configure mariadb
+  vars:
+        dbname: "dbnametoto"
+        dbuser: "dbusername"
+        dbpass: "dbpass"
+  tasks:
+    - name: Install mariadb
+      yum: name="{{ item }}" state=latest
+      with_items:
+        - mariadb
+        - mariadb-server
+        - MySQL-python
+        - php-mysql
+
+    - name: Open port
+      firewalld:
+        state: enabled
+        zone: public
+        immediate: yes
+        service: mysql
+        permanent: yes
+
+    - name: Ensure MariaDB is properly configured
+      template:
+#        src: ../templates/etc_my.cnf.d_network.cnf.j2
+        src: etc_my.cnf.d_network.cnf.j2
+        dest: /etc/my.cnf.d/network.cnf
+        backup: yes
+
+    - name: start and enable mariadb
+      service:
+        name: mariadb
+        enabled: yes
+        state: started
+
+    - name: Create the database
+      mysql_db:
+        name: '{{ dbname }}'
+        encoding: utf8
+        state: present
+
+    - name: Create user and perms.
+      mysql_user:
+        name: '{{ dbuser }}'
+        state: present
+        host: '%'
+        password: '{{ dbpass }}'
+        priv: '*.*:ALL'
