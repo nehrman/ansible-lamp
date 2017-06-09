@@ -83,11 +83,12 @@
 			<div class="col-sm-12">
 				<span class="li_data pull-left icon-lg"></span>
 				<h3 class="mg-md  text-center">
-					Le service mySQL fonctione sur:<br />
+						'{#					Le service mySQL fonctione sur:<br/>
 										{% for host in {{ vmweb }} %}
 						'{{ hostvars[host]['inventory_hostname'] }}'
 				<br>
 				{% endfor %}
+				#}'
 				</h3>
 			</div>
 		</div>
@@ -97,7 +98,7 @@
 					La liste des bases de données découvertes:<br />
 				</h3>
 			</div>
-			<?php
+			'{#			<?php
 /*			{% for host in {{ db }}  %} */
 				$link = mysqli_connect('{{ vmdb }}', '{{ vmdb }}.dbuser', '{{ vmdb }}.dbpass') or die(mysqli_connect_error($link));
 		        {% endfor %}
@@ -107,6 +108,7 @@
 				echo $row['Database'] . "<br>\n";
 				}
 				?>
+				#}'
 			</div>
 		</div>
 	</div>
