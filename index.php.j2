@@ -84,7 +84,7 @@
 				<span class="li_data pull-left icon-lg"></span>
 				<h3 class="mg-md  text-center">
 					Le service mySQL fonctione sur:<br />
-										{% for host in {{ db }} %}
+										{% for host in {{ vmweb }} %}
 						'{{ hostvars[host]['inventory_hostname'] }}'
 				<br>
 				{% endfor %}
@@ -99,7 +99,7 @@
 			</div>
 			<?php
 /*			{% for host in {{ db }}  %} */
-				$link = mysqli_connect('{{ vmdb }}', '{{ vmdb }}'.dbuser, '{{ vmdb }}'.dbpass) or die(mysqli_connect_error($link));
+				$link = mysqli_connect('{{ vmdb }}', '{{ vmdb }}.dbuser', '{{ vmdb }}.dbpass') or die(mysqli_connect_error($link));
 		        {% endfor %}
 		        $res = mysqli_query($link, "SHOW DATABASES;");
 				while ($row = mysqli_fetch_assoc($res))
