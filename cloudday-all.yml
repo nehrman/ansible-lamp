@@ -1,7 +1,7 @@
 # vim:se ft=ansible
 # Replace all with group name to match your needs.
 - hosts: vmweb2
-  name: Install and configure httpd
+  name: Installer httpd
   tasks:
     - name: Install httpd
       yum: name={{ item }} state=latest
@@ -11,46 +11,46 @@
         - php-mysql
         - libsemanage-python
 
-    - name: Install index.php
+    - name: Installer la page index.php
       template:
         src: index.php.j2
         dest: /var/www/html/index.php
         backup: yes
 
-    - name: Install a web page
+    - name: Installe le site web
       copy: src={{ item }} dest=/var/www/html
       with_fileglob:
               - ../files/fonts/
               - ../files/*
 
-    - name: Open port
+    - name: Ouvrir les ports du firewall
       firewalld: "port={{ item }}/tcp state=enabled zone=public permanent=yes immediate=true"
       with_items:
         - 80
         - 443
 
-    - name: Allow httpd to connect to network
+    - name: Configurer SELinux
       seboolean:
         state: yes
         name: httpd_can_network_connect
         persistent: yes
 
-    - name: start and enable httpd
+    - name: Activer httpd
       service:
         name: httpd
         enabled: yes
         state: started
 
 
-# Replace host with the group name to match your needs. 
+# Replace host with the group name to match your needs.
 - hosts: vmdb2
-  name: Install and configure mariadb
+  name: Installer et configurer mariadb
   vars:
         dbname: "dbname"
         dbuser: "dbusername"
         dbpass: "dbpass"
   tasks:
-    - name: Install mariadb
+    - name: Installer mariadb
       yum: name="{{ item }}" state=latest
       with_items:
         - mariadb
@@ -58,7 +58,7 @@
         - MySQL-python
         - php-mysql
 
-    - name: Open port
+    - name: Ouvrir les ports du firewall
       firewalld:
         state: enabled
         zone: public
@@ -66,25 +66,25 @@
         service: mysql
         permanent: yes
 
-    - name: Ensure MariaDB is properly configured
+    - name: Configurer MariaDB
       template:
         src: etc_my.cnf.d_network.cnf.j2
         dest: /etc/my.cnf.d/network.cnf
         backup: yes
 
-    - name: start and enable mariadb
+    - name: Activer MariaDB
       service:
         name: mariadb
         enabled: yes
         state: started
 
-    - name: Create the database
+    - name: Créer la base de données
       mysql_db:
         name: '{{ dbname }}'
         encoding: utf8
         state: present
 
-    - name: Create user and perms.
+    - name: Créer les utilisateurs de la base de données.
       mysql_user:
         name: '{{ dbuser }}'
         state: present
