@@ -1,7 +1,7 @@
 # vim:se ft=ansible
 # Replace all with group name to match your needs.
 - hosts: "{{ vmweb }}"
-  name: Installer httpd
+  name: Installer l'application
   tasks:
 #    - name: Installer httpd
 #      yum: name={{ item }} state=latest
@@ -43,7 +43,7 @@
 
 # Replace host with the group name to match your needs.
 - hosts: "{{ vmdb }}"
-  name: Installer et configurer mariadb
+  name: Installer la base de données
   vars:
         dbname: "dbname"
         dbuser: "dbusername"
