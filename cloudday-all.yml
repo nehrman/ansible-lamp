@@ -1,6 +1,6 @@
 # vim:se ft=ansible
 # Replace all with group name to match your needs.
-- hosts: {{ vmweb }}
+- hosts: "{{ vmweb }}"
   name: Installer httpd
   tasks:
     - name: Installer httpd
@@ -43,7 +43,7 @@
 
 
 # Replace host with the group name to match your needs.
-- hosts: {{ vmdb }}
+- hosts: "{{ vmdb }}"
   name: Installer et configurer mariadb
   vars:
         dbname: "dbname"
