@@ -97,7 +97,7 @@
 				</h3>
 			</div>
 			<?php
-				$link = mysqli_connect('{{ vmdb }}', '{{ vmdb }}.dbuser', '{{ vmdb }}.dbpass') or die(mysqli_connect_error($link));
+			$link = mysqli_connect('{{ ansible_ssh_host }}', '{{ vmdb }}.dbuser', '{{ vmdb }}.dbpass') or die(mysqli_connect_error($link));
 		        $res = mysqli_query($link, "SHOW DATABASES;");
 				while ($row = mysqli_fetch_assoc($res))
 				{
