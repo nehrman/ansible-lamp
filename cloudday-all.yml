@@ -3,14 +3,13 @@
 - hosts: "{{ vmweb }}"
   name: Installer httpd
   tasks:
-    - name: Installer httpd
-      yum: name={{ item }} state=latest
-      with_items:
-        - httpd
-        - php
-        - php-mysql
-        - libsemanage-python
-
+#    - name: Installer httpd
+#      yum: name={{ item }} state=latest
+#      with_items:
+#        - httpd
+#        - php
+#        - php-mysql
+#        - libsemanage-python
     - name: Installer la page index.php
       template:
         src: index.php.j2
@@ -50,14 +49,13 @@
         dbuser: "dbusername"
         dbpass: "dbpass"
   tasks:
-    - name: Installer mariadb
-      yum: name="{{ item }}" state=latest
-      with_items:
-        - mariadb
-        - mariadb-server
-        - MySQL-python
-        - php-mysql
-
+#    - name: Installer mariadb
+#      yum: name="{{ item }}" state=latest
+#      with_items:
+#        - mariadb
+#        - mariadb-server
+#        - MySQL-python
+#        - php-mysql
     - name: Ouvrir les ports du firewall
       firewalld:
         state: enabled
