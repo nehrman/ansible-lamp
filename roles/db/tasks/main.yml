@@ -1,5 +1,5 @@
 - hosts: db
-  name: Install and configure mariadb
+  name: Install and configure a database
   tasks:
     - name: Install mariadb
       yum: name="{{ item }}" state=latest
