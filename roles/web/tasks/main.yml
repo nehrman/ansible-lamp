@@ -11,7 +11,7 @@
 
     - name: Installer la page index.php
       template:
-        src: index.php.j2
+        src: templates/index.php.j2
         dest: /var/www/html/index.php
         backup: yes
 
