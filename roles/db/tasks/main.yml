@@ -2,13 +2,10 @@
 
   name: Install and configure a database
   tasks:
-    - name: Ensure firewalld and firewalld python packages are present
+    - name: Ensure firewalld package is present
       yum:
-        name: "{{ item }}"
+        name: firewalld
         state: present
-      with_items:
-        - firewalld
-        - python-firewalld
 
     - name: Install mariadb
       yum:
