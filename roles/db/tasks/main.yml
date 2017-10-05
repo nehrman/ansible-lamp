@@ -7,6 +7,12 @@
         name: firewalld
         state: present
 
+    - name: Ensure firewalld service is started
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+
     - name: Install mariadb
       yum:
         name: "{{ item }}"
