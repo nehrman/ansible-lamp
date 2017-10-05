@@ -9,7 +9,14 @@
         - php-mysql
         - libsemanage-python
         - libselinux-python
+        - firewalld
 
+    - name: Ensure firewalld service is started
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+        
     - name: Installer la page index.php
       template:
         src: ../templates/index.php.j2
