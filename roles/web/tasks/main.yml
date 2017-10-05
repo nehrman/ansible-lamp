@@ -8,6 +8,7 @@
         - php
         - php-mysql
         - libsemanage-python
+        - libselinux-python
 
     - name: Installer la page index.php
       template:
