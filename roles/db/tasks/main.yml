@@ -2,7 +2,7 @@
 
   name: Install and configure a database
   tasks:
-    - name: Ensure firewall-cmd and firewall-cmd python packages are present
+    - name: Ensure firewalld and firewalld python packages are present
       yum:
         name: "{{ item }}"
         state: present
