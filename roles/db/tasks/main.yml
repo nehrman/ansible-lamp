@@ -1,8 +1,19 @@
 - hosts: db
+
   name: Install and configure a database
   tasks:
+    - name: Ensure firewall-cmd and firewall-cmd python packages are present
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - firewalld
+        - python-firewalld
+
     - name: Install mariadb
-      yum: name="{{ item }}" state=latest
+      yum:
+        name: "{{ item }}"
+        state: latest
       with_items:
         - mariadb
         - mariadb-server
